@@ -1,0 +1,10 @@
+{
+	"id": "toggle-properties",
+	"name": "Toggle Properties",
+	"version": "1.0.0",
+	"minAppVersion": "0.15.0",
+	"description": "Toggle Visibility of Properties in Files.",
+	"author": "Nils",
+	"authorUrl": "https://github.com/Nils-0",
+	"isDesktopOnly": true
+}
