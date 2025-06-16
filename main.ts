@@ -1,18 +1,18 @@
-import { Notice, Plugin } from 'obsidian';
+import { Plugin } from 'obsidian';
 import * as fs from 'fs';
 import * as path from 'path';
 
 export default class TogglePropteriesPlugin extends Plugin {
 	async onload() {
 		this.addCommand({
-			id: 'toggle-properties',
-			name: 'Toggle Properties',
+			id: 'switch-properties-view',
+			name: 'Switch Properties View',
 			callback: async () => {
 				try {
 					const vaultPath = (this.app.vault.adapter as any).basePath;
-					const configFilePath = path.join(vaultPath, '.obsidian', 'app.json');
+					const configAppFilePath = path.join(vaultPath, this.app.vault.configDir, 'app.json');
 					try {
-						const raw = fs.readFileSync(configFilePath, 'utf-8');
+						const raw = fs.readFileSync(configAppFilePath, 'utf-8');
 						const json = JSON.parse(raw);
 
 						if (json.propertiesInDocument == 'hidden') {
@@ -20,7 +20,7 @@ export default class TogglePropteriesPlugin extends Plugin {
 						} else {
 							json.propertiesInDocument = 'hidden'
 						}
-						fs.writeFileSync(configFilePath, JSON.stringify(json, null, 2), 'utf-8');
+						fs.writeFileSync(configAppFilePath, JSON.stringify(json, null, 2), 'utf-8');
 
 					} catch (err) {
 						console.error("Fehler beim Lesen oder Schreiben der Datei:", err);
